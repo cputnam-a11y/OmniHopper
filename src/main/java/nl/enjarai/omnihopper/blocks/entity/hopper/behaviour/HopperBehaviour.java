@@ -6,10 +6,11 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -17,7 +18,6 @@ import net.minecraft.world.World;
 import nl.enjarai.omnihopper.blocks.entity.hopper.HopperBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("UnstableApiUsage")
 public abstract class HopperBehaviour<T> {
 	private final Identifier hopperType;
 	protected final HopperBlockEntity<?> blockEntity;
@@ -39,9 +39,9 @@ public abstract class HopperBehaviour<T> {
 		return blockApiLookup;
 	}
 
-	public abstract void writeNbt(NbtCompound tag);
+	public abstract void writeNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup);
 
-	public abstract void readNbt(NbtCompound tag);
+	public abstract void readNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup);
 
 	public long getAmountPerActivation(BlockState targetState) {
 		return 1;
@@ -60,7 +60,7 @@ public abstract class HopperBehaviour<T> {
 		return null;
 	}
 
-	public ActionResult onUse(PlayerEntity player, Hand hand, BlockHitResult hit) {
-		return ActionResult.PASS;
+	public ItemActionResult onUseWithItem(PlayerEntity player, Hand hand, BlockHitResult hit) {
+		return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 	}
 }

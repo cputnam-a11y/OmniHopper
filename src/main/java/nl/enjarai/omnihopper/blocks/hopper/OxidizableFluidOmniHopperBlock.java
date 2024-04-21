@@ -17,7 +17,6 @@ public class OxidizableFluidOmniHopperBlock extends FluidOmniHopperBlock impleme
         return degradationLevel;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         tickDegradation(state, world, pos, random);

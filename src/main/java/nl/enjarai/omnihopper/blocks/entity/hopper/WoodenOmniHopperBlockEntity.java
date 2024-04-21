@@ -7,7 +7,6 @@ import net.minecraft.util.math.BlockPos;
 import nl.enjarai.omnihopper.blocks.ModBlocks;
 import nl.enjarai.omnihopper.blocks.entity.hopper.behaviour.WoodenHopperBehaviour;
 
-@SuppressWarnings("UnstableApiUsage")
 public class WoodenOmniHopperBlockEntity extends OmniHopperBlockEntity<ItemVariant> {
     public WoodenOmniHopperBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlocks.WOODEN_OMNIHOPPER_BLOCK_ENTITY, pos, state);

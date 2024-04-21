@@ -16,7 +16,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import nl.enjarai.omnihopper.datagen.HopperRotation;
 
-@SuppressWarnings("deprecation")
 public abstract class OmniHopperBlock extends HopperBlock {
     public static final EnumProperty<Direction> POINTY_BIT;
     public static final EnumProperty<Direction> SUCKY_BIT;

@@ -15,7 +15,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
-@SuppressWarnings("deprecation")
 public abstract class BasicHopperBlock extends HopperBlock {
 	public static final EnumProperty<Direction> POINTY_BIT;
 

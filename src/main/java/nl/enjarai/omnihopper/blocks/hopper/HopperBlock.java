@@ -9,6 +9,7 @@ import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.data.client.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
@@ -24,6 +25,7 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
@@ -31,7 +33,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import nl.enjarai.omnihopper.OmniHopper;
 import nl.enjarai.omnihopper.blocks.entity.hopper.HopperBlockEntity;
@@ -44,7 +45,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 import java.util.Set;
 
-@SuppressWarnings({"deprecation"})
 public abstract class HopperBlock extends BlockWithEntity implements DatagenBlock, TextureMapProvider, HasTooltip {
     public static final BooleanProperty ENABLED;
     public static final VoxelShape[] SUCKY_AREA;
@@ -160,20 +160,23 @@ public abstract class HopperBlock extends BlockWithEntity implements DatagenBloc
     }
 
     @Override
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
+    public boolean canPathfindThrough(BlockState state, NavigationType type) {
         return false;
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (!world.isClient && world.getBlockEntity(pos) instanceof HopperBlockEntity<?> hopperBlockEntity) {
+            return hopperBlockEntity.onUseWithItem(player, hand, hit);
+        }
+        return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    @Override
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!world.isClient) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof HopperBlockEntity<?> hopperBlockEntity) {
-                var entityResult = hopperBlockEntity.onUse(player, hand, hit);
-                if (entityResult.isAccepted()) {
-                    return entityResult;
-                }
-
                 player.openHandledScreen(hopperBlockEntity);
                 player.incrementStat(Stats.INSPECT_HOPPER);
             }
@@ -184,7 +187,7 @@ public abstract class HopperBlock extends BlockWithEntity implements DatagenBloc
 
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-        if (itemStack.hasCustomName()) {
+        if (itemStack.contains(DataComponentTypes.CUSTOM_NAME)) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof HopperBlockEntity<?> hopperBlockEntity) {
                 hopperBlockEntity.setCustomName(itemStack.getName());

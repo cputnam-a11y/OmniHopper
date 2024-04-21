@@ -7,7 +7,6 @@ import net.minecraft.util.math.BlockPos;
 import nl.enjarai.omnihopper.blocks.ModBlocks;
 import nl.enjarai.omnihopper.blocks.entity.hopper.behaviour.FluidHopperBehaviour;
 
-@SuppressWarnings("UnstableApiUsage")
 public class FluidOmniHopperBlockEntity extends OmniHopperBlockEntity<FluidVariant> {
     public FluidOmniHopperBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlocks.FLUID_OMNIHOPPER_BLOCK_ENTITY, blockPos, blockState);

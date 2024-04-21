@@ -13,7 +13,6 @@ import nl.enjarai.omnihopper.blocks.ModBlocks;
 import nl.enjarai.omnihopper.blocks.OpenBoxBlock;
 import nl.enjarai.omnihopper.util.ExecutingInsertionStorage;
 
-@SuppressWarnings("UnstableApiUsage")
 public class OpenBoxBlockEntity extends BlockEntity {
     private final ExecutingInsertionStorage<ItemVariant> itemStorage = new ExecutingInsertionStorage<>() {
         @Override

@@ -4,8 +4,12 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SidedStorageBlockEntity;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import nl.enjarai.omnihopper.util.FurnaceFuelBucketStorage;
 import org.jetbrains.annotations.Nullable;
@@ -14,10 +18,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
-@SuppressWarnings("UnstableApiUsage")
 @Mixin(value = AbstractFurnaceBlockEntity.class, priority = 1200)
-public abstract class AbstractFurnaceBlockEntityMixin implements SidedStorageBlockEntity {
-    @Shadow public abstract ItemStack getStack(int slot);
+public abstract class AbstractFurnaceBlockEntityMixin extends LockableContainerBlockEntity implements SidedStorageBlockEntity {
+    protected AbstractFurnaceBlockEntityMixin(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
+        super(blockEntityType, blockPos, blockState);
+    }
+
     @Shadow public abstract void setStack(int slot, ItemStack stack);
 
     @Unique
