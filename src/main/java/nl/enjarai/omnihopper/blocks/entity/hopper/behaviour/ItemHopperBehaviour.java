@@ -13,6 +13,7 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.HopperScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.Identifier;
@@ -29,7 +30,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("UnstableApiUsage")
 public abstract class ItemHopperBehaviour extends HopperBehaviour<ItemVariant> {
 	public final SimpleInventory inventory = new SimpleInventory(getInventorySize()) {
 		@Override
@@ -53,14 +53,14 @@ public abstract class ItemHopperBehaviour extends HopperBehaviour<ItemVariant> {
 	}
 
 	@Override
-	public void readNbt(NbtCompound nbt) {
+	public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
 		inventory.heldStacks = DefaultedList.ofSize(inventory.size(), ItemStack.EMPTY);
-		Inventories.readNbt(nbt, inventory.heldStacks);
+		Inventories.readNbt(nbt, inventory.heldStacks, registryLookup);
 	}
 
 	@Override
-	public void writeNbt(NbtCompound nbt) {
-		Inventories.writeNbt(nbt, inventory.heldStacks);
+	public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+		Inventories.writeNbt(nbt, inventory.heldStacks, registryLookup);
 	}
 
 	@Override

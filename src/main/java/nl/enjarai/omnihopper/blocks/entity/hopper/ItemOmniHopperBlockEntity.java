@@ -7,7 +7,6 @@ import net.minecraft.util.math.BlockPos;
 import nl.enjarai.omnihopper.blocks.ModBlocks;
 import nl.enjarai.omnihopper.blocks.entity.hopper.behaviour.VanillaHopperBehaviour;
 
-@SuppressWarnings("UnstableApiUsage")
 public class ItemOmniHopperBlockEntity extends OmniHopperBlockEntity<ItemVariant> {
     public ItemOmniHopperBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlocks.OMNIHOPPER_BLOCK_ENTITY, pos, state);
