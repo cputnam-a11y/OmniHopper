@@ -1,1 +1,2 @@
-- Updated to 1.20.5.
+- Added a config option to disable the automatic removal of furnace extraction exceptions.
+  - This can be turned off to preserve vanilla hopper behaviour when pulling empty buckets from furnaces.

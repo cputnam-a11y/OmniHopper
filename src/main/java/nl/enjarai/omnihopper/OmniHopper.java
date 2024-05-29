@@ -20,6 +20,8 @@ public class OmniHopper implements ModInitializer, CicadaEntrypoint {
 		ModBlocks.register();
 		ModItems.register();
 		ModScreenHandlers.register();
+
+		var touch = ModConfig.INSTANCE;
 	}
 
 	public static Identifier id(String path) {

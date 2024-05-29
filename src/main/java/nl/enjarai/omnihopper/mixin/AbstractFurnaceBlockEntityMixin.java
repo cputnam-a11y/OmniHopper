@@ -11,6 +11,7 @@ import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import nl.enjarai.omnihopper.ModConfig;
 import nl.enjarai.omnihopper.util.FurnaceFuelBucketStorage;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -55,6 +56,9 @@ public abstract class AbstractFurnaceBlockEntityMixin extends LockableContainerB
             )
     )
     private boolean removeExtractionExceptions(boolean original) {
-        return false;
+        if (ModConfig.INSTANCE.removeFurnaceExtractionExceptions) {
+            return false;
+        }
+        return original;
     }
 }
