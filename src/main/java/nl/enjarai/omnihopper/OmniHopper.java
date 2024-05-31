@@ -1,7 +1,10 @@
 package nl.enjarai.omnihopper;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.GameRules;
 import nl.enjarai.cicada.api.conversation.ConversationManager;
 import nl.enjarai.cicada.api.util.CicadaEntrypoint;
 import nl.enjarai.cicada.api.util.JsonSource;
@@ -15,17 +18,20 @@ public class OmniHopper implements ModInitializer, CicadaEntrypoint {
 	public static final String MODID = "omnihopper";
 	public static final Logger LOGGER = ProperLogger.getLogger(MODID);
 
+	public static final GameRules.Key<GameRules.BooleanRule> REMOVE_FURNACE_EXCEPTIONS = GameRuleRegistry.register(
+			MODID + ":removeFurnaceExtractionExceptions",
+			GameRules.Category.MISC, GameRuleFactory.createBooleanRule(true)
+	);
+
 	@Override
 	public void onInitialize() {
 		ModBlocks.register();
 		ModItems.register();
 		ModScreenHandlers.register();
-
-		var touch = ModConfig.INSTANCE;
 	}
 
 	public static Identifier id(String path) {
-		return new Identifier(MODID, path);
+		return Identifier.of(MODID, path);
 	}
 
 	@Override

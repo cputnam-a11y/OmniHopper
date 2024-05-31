@@ -37,10 +37,10 @@
   "accessWidener" : "omnihopper.accesswidener",
   "depends": {
     "cooldown-coordinator": "^0.4.3",
-    "cicada": "*",
+    "cicada": ">=0.6.0 <1.0.0",
     "fabric": "*",
     "fabricloader": ">=0.15",
-    "minecraft": ">=1.20.5",
+    "minecraft": ">=1.20.5 <=1.20.6",
     "java": ">=21"
   },
   "custom": {

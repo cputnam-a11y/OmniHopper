@@ -33,5 +33,7 @@
   "container.fluid_omnihopper": "Omni-Flopper",
   "container.fluid_hopper": "Flopper",
   "container.wooden_omnihopper": "Omni-Whopper",
-  "container.wooden_hopper": "Whopper"
+  "container.wooden_hopper": "Whopper",
+
+  "gamerule.omnihopper:removeFurnaceExtractionExceptions": "[OmniHopper] Remove Furnace fuel slot extraction exceptions"
 }
