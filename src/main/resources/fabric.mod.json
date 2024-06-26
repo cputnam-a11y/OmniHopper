@@ -36,11 +36,11 @@
   ],
   "accessWidener" : "omnihopper.accesswidener",
   "depends": {
-    "cooldown-coordinator": "^0.4.3",
-    "cicada": ">=0.6.0 <1.0.0",
+    "cooldown-coordinator": ">=0.7.2",
+    "cicada": ">=0.8.0 <1.0.0",
     "fabric": "*",
     "fabricloader": ">=0.15",
-    "minecraft": ">=1.20.5 <=1.20.6",
+    "minecraft": "1.21.x",
     "java": ">=21"
   },
   "custom": {
