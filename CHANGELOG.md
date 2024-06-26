@@ -1,3 +1,1 @@
-- Replaced the furnace extraction removal exceptions config option with a gamerule for easier configuring.
-- Updated Cooldown Coordinator to fix a sizable bug.
-- Removed CICADA as an included dependency, it must now be downloaded separately.
+- Updated to 1.21. (Thank you @Benonardo)
