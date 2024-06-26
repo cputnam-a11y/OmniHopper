@@ -1,7 +1,7 @@
 plugins {
-	id 'fabric-loom' version '1.6-SNAPSHOT'
+	id 'fabric-loom' version '1.7-SNAPSHOT'
 	id 'maven-publish'
-	id "me.modmuss50.mod-publish-plugin" version "0.4.4"
+	id "me.modmuss50.mod-publish-plugin" version "0.5.1"
 }
 
 sourceCompatibility = JavaVersion.VERSION_21
@@ -92,28 +92,11 @@ publishing {
 
 loom {
 	accessWidenerPath = file("src/main/resources/omnihopper.accesswidener")
-
-	runs {
-		datagenClient {
-			client()
-			name "Data Generation Client"
-			vmArg "-Dfabric-api.datagen"
-			vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-			vmArg "-Dfabric-api.datagen.modid=${modid}"
-
-			ideConfigGenerated = true
-			runDir "build/datagen"
-		}
-	}
 }
 
-sourceSets {
-	main {
-		resources {
-			srcDirs += [
-				'src/main/generated'
-			]
-		}
+fabricApi {
+	configureDataGeneration {
+		strictValidation = true
 	}
 }
 

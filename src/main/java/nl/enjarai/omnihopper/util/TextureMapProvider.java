@@ -29,11 +29,11 @@ public interface TextureMapProvider {
 
     static TextureMap forVanillaHopper() {
         return new TextureMap()
-                .put(TextureKey.PARTICLE, new Identifier("block/hopper_outside"))
-                .put(TextureKey.SIDE, new Identifier("block/hopper_outside"))
-                .put(TextureKey.TOP, new Identifier("block/hopper_top"))
-                .put(TextureKey.BOTTOM, new Identifier("block/hopper_outside"))
-                .put(TextureKey.INSIDE, new Identifier("block/hopper_inside"));
+                .put(TextureKey.PARTICLE, Identifier.ofVanilla("block/hopper_outside"))
+                .put(TextureKey.SIDE, Identifier.ofVanilla("block/hopper_outside"))
+                .put(TextureKey.TOP, Identifier.ofVanilla("block/hopper_top"))
+                .put(TextureKey.BOTTOM, Identifier.ofVanilla("block/hopper_outside"))
+                .put(TextureKey.INSIDE, Identifier.ofVanilla("block/hopper_inside"));
     }
 
     static Identifier getSubId(Identifier id, String suffix) {

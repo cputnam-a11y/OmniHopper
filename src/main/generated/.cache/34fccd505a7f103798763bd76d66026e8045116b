@@ -1,3 +1,3 @@
-// 1.20.5 Release Candidate 2	2024-04-21T09:20:57.138114345	Omni-Hopper/Tags for minecraft:block
-8c5812524d817280a216604015f3db142880307d data/minecraft/tags/blocks/mineable/pickaxe.json
-1af9bd76ce550c16ba04063b062161b6933877c4 data/minecraft/tags/blocks/mineable/axe.json
+// 1.21	2024-06-26T15:40:02.211578202	Omni-Hopper/Tags for minecraft:block
+8c5812524d817280a216604015f3db142880307d data/minecraft/tags/block/mineable/pickaxe.json
+1af9bd76ce550c16ba04063b062161b6933877c4 data/minecraft/tags/block/mineable/axe.json

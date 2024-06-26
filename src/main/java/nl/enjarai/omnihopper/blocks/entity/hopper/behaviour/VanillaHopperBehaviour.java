@@ -4,7 +4,7 @@ import net.minecraft.util.Identifier;
 import nl.enjarai.omnihopper.blocks.entity.hopper.HopperBlockEntity;
 
 public class VanillaHopperBehaviour extends ItemHopperBehaviour {
-    public static final Identifier TYPE_ID = new Identifier("hopper");
+    public static final Identifier TYPE_ID = Identifier.ofVanilla("hopper");
 
     public VanillaHopperBehaviour(HopperBlockEntity<?> blockEntity) {
         super(TYPE_ID, blockEntity);
