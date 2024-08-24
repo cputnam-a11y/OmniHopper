@@ -37,7 +37,7 @@ public class OmniHopper implements ModInitializer, CicadaEntrypoint {
 	@Override
 	public void registerConversations(ConversationManager conversationManager) {
 		conversationManager.registerSource(
-				JsonSource.fromUrl("https://raw.githubusercontent.com/enjarai/OmniHopper/1.20.2/dev/src/main/resources/cicada/omnihopper/conversations.json")
+				JsonSource.fromUrl("https://raw.githubusercontent.com/enjarai/OmniHopper/1.21/dev/src/main/resources/cicada/omnihopper/conversations.json")
 						.or(JsonSource.fromResource("cicada/omnihopper/conversations.json")),
 				LOGGER::info
 		);
