@@ -13,26 +13,26 @@ import nl.enjarai.omnihopper.util.TextureMapProvider;
 import org.jetbrains.annotations.Nullable;
 
 public class FluidHopperBlock extends BasicHopperBlock {
-	protected final Oxidizable.OxidationLevel degradationLevel;
+    protected final Oxidizable.OxidationLevel degradationLevel;
 
-	public FluidHopperBlock(Oxidizable.OxidationLevel degradationLevel, Settings settings) {
-		super(settings);
-		this.degradationLevel = degradationLevel;
-	}
+    public FluidHopperBlock(Oxidizable.OxidationLevel degradationLevel, Settings settings) {
+        super(settings);
+        this.degradationLevel = degradationLevel;
+    }
 
-	@Nullable
-	@Override
-	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-		return new FluidHopperBlockEntity(pos, state);
-	}
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new FluidHopperBlockEntity(pos, state);
+    }
 
-	@Override
-	public TextureMap getTextureMap() {
-		return TextureMapProvider.forOxidizableHopperType(FluidHopperBehaviour.TYPE_ID, degradationLevel);
-	}
+    @Override
+    public TextureMap getTextureMap() {
+        return TextureMapProvider.forOxidizableHopperType(FluidHopperBehaviour.TYPE_ID, degradationLevel);
+    }
 
-	@Override
-	public Identifier modifyTooltipId(Identifier id) {
-		return OmniHopper.id("fluid_hopper");
-	}
+    @Override
+    public Identifier modifyTooltipId(Identifier id) {
+        return OmniHopper.id("fluid_hopper");
+    }
 }

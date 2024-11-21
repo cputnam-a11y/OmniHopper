@@ -31,85 +31,85 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class ItemHopperBehaviour extends HopperBehaviour<ItemVariant> {
-	public final SimpleInventory inventory = new SimpleInventory(getInventorySize()) {
-		@Override
-		public void markDirty() {
-			blockEntity.markDirty();
-		}
-	};
-	private final InventoryStorage inventoryWrapper = InventoryStorage.of(inventory, null);
+    public final SimpleInventory inventory = new SimpleInventory(getInventorySize()) {
+        @Override
+        public void markDirty() {
+            blockEntity.markDirty();
+        }
+    };
+    private final InventoryStorage inventoryWrapper = InventoryStorage.of(inventory, null);
 
-	public ItemHopperBehaviour(Identifier typeId, HopperBlockEntity<?> blockEntity) {
-		super(typeId, ItemStorage.SIDED, blockEntity);
-	}
+    public ItemHopperBehaviour(Identifier typeId, HopperBlockEntity<?> blockEntity) {
+        super(typeId, ItemStorage.SIDED, blockEntity);
+    }
 
-	public int getInventorySize() {
-		return 5;
-	}
+    private static List<ItemEntity> getInputItemEntities(World world, BlockPos pos, Direction suckyDirection) {
+        return getInputAreaShape(suckyDirection).getBoundingBoxes().stream().flatMap((box) ->
+                world.getEntitiesByClass(ItemEntity.class, box.offset(pos), EntityPredicates.VALID_ENTITY).stream()
+        ).collect(Collectors.toList());
+    }
 
-	@Override
-	public Storage<ItemVariant> getStorage() {
-		return inventoryWrapper;
-	}
+    private static VoxelShape getInputAreaShape(Direction suckyDirection) {
+        return ItemOmniHopperBlock.SUCKY_AREA[suckyDirection.ordinal()];
+    }
 
-	@Override
-	public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-		inventory.heldStacks = DefaultedList.ofSize(inventory.size(), ItemStack.EMPTY);
-		Inventories.readNbt(nbt, inventory.heldStacks, registryLookup);
-	}
+    public int getInventorySize() {
+        return 5;
+    }
 
-	@Override
-	public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-		Inventories.writeNbt(nbt, inventory.heldStacks, registryLookup);
-	}
+    @Override
+    public Storage<ItemVariant> getStorage() {
+        return inventoryWrapper;
+    }
 
-	@Override
-	public boolean pickupInWorldObjects(World world, BlockPos pos, Direction suckyDirection) {
-		Iterator<ItemEntity> entities = getInputItemEntities(world, pos, suckyDirection).iterator();
+    @Override
+    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        inventory.heldStacks = DefaultedList.ofSize(inventory.size(), ItemStack.EMPTY);
+        Inventories.readNbt(nbt, inventory.heldStacks, registryLookup);
+    }
 
-		ItemEntity itemEntity;
-		do {
-			if (!entities.hasNext()) {
-				return false;
-			}
+    @Override
+    public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        Inventories.writeNbt(nbt, inventory.heldStacks, registryLookup);
+    }
 
-			itemEntity = entities.next();
-		} while(!suckItem(itemEntity));
+    @Override
+    public boolean pickupInWorldObjects(World world, BlockPos pos, Direction suckyDirection) {
+        Iterator<ItemEntity> entities = getInputItemEntities(world, pos, suckyDirection).iterator();
 
-		return true;
-	}
+        ItemEntity itemEntity;
+        do {
+            if (!entities.hasNext()) {
+                return false;
+            }
 
-	private boolean suckItem(ItemEntity itemEntity) {
-		boolean bl = false;
-		ItemStack itemStack = itemEntity.getStack();
+            itemEntity = entities.next();
+        } while (!suckItem(itemEntity));
 
-		try (Transaction transaction = Transaction.openOuter()) {
-			long amountInserted = getStorage().insert(ItemVariant.of(itemStack), itemStack.getCount(), transaction);
-			itemStack.decrement((int) amountInserted);
-			transaction.commit();
-		}
+        return true;
+    }
 
-		if (itemStack.isEmpty()) {
-			bl = true;
-			itemEntity.discard();
-		}
+    private boolean suckItem(ItemEntity itemEntity) {
+        boolean bl = false;
+        ItemStack itemStack = itemEntity.getStack();
 
-		return bl;
-	}
+        try (Transaction transaction = Transaction.openOuter()) {
+            long amountInserted = getStorage().insert(ItemVariant.of(itemStack), itemStack.getCount(), transaction);
+            itemStack.decrement((int) amountInserted);
+            transaction.commit();
+        }
 
-	private static List<ItemEntity> getInputItemEntities(World world, BlockPos pos, Direction suckyDirection) {
-		return getInputAreaShape(suckyDirection).getBoundingBoxes().stream().flatMap((box) ->
-				world.getEntitiesByClass(ItemEntity.class, box.offset(pos), EntityPredicates.VALID_ENTITY).stream()
-		).collect(Collectors.toList());
-	}
+        if (itemStack.isEmpty()) {
+            bl = true;
+            itemEntity.discard();
+        }
 
-	private static VoxelShape getInputAreaShape(Direction suckyDirection) {
-		return ItemOmniHopperBlock.SUCKY_AREA[suckyDirection.ordinal()];
-	}
+        return bl;
+    }
 
-	@Nullable
-	@Override
-	public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-		return new HopperScreenHandler(syncId, inv, inventory);
-	}
+    @Nullable
+    @Override
+    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+        return new HopperScreenHandler(syncId, inv, inventory);
+    }
 }

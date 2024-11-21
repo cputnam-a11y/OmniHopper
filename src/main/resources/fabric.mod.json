@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "omnihopper",
   "version": "${version}",
-
   "name": "Omni-Hopper",
   "description": "Break free from the constraints of normal hoppers. Experience true item and fluid transportation freedom.",
   "authors": [
@@ -12,10 +11,8 @@
     "sources": "https://github.com/enjarai/OmniHopper",
     "issues": "https://github.com/enjarai/OmniHopper/issues"
   },
-
   "license": "MIT",
   "icon": "assets/omnihopper/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -34,13 +31,13 @@
   "mixins": [
     "omnihopper.mixins.json"
   ],
-  "accessWidener" : "omnihopper.accesswidener",
+  "accessWidener": "omnihopper.accesswidener",
   "depends": {
     "cooldown-coordinator": "^0.4.3",
     "cicada": ">=0.6.0 <1.0.0",
     "fabric": "*",
-    "fabricloader": ">=0.15",
-    "minecraft": ">=1.20.5 <=1.20.6",
+    "fabricloader": ">=0.16.9",
+    "minecraft": "1.21.3",
     "java": ">=21"
   },
   "custom": {

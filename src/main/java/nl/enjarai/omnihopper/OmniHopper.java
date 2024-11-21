@@ -15,31 +15,31 @@ import nl.enjarai.omnihopper.screen.ModScreenHandlers;
 import org.slf4j.Logger;
 
 public class OmniHopper implements ModInitializer, CicadaEntrypoint {
-	public static final String MODID = "omnihopper";
-	public static final Logger LOGGER = ProperLogger.getLogger(MODID);
+    public static final String MODID = "omnihopper";
+    public static final Logger LOGGER = ProperLogger.getLogger(MODID);
 
-	public static final GameRules.Key<GameRules.BooleanRule> REMOVE_FURNACE_EXCEPTIONS = GameRuleRegistry.register(
-			MODID + ":removeFurnaceExtractionExceptions",
-			GameRules.Category.MISC, GameRuleFactory.createBooleanRule(true)
-	);
+    public static final GameRules.Key<GameRules.BooleanRule> REMOVE_FURNACE_EXCEPTIONS = GameRuleRegistry.register(
+            MODID + ":removeFurnaceExtractionExceptions",
+            GameRules.Category.MISC, GameRuleFactory.createBooleanRule(true)
+    );
 
-	@Override
-	public void onInitialize() {
-		ModBlocks.register();
-		ModItems.register();
-		ModScreenHandlers.register();
-	}
+    public static Identifier id(String path) {
+        return Identifier.of(MODID, path);
+    }
 
-	public static Identifier id(String path) {
-		return Identifier.of(MODID, path);
-	}
+    @Override
+    public void onInitialize() {
+        ModBlocks.register();
+        ModItems.register();
+        ModScreenHandlers.register();
+    }
 
-	@Override
-	public void registerConversations(ConversationManager conversationManager) {
-		conversationManager.registerSource(
-				JsonSource.fromUrl("https://raw.githubusercontent.com/enjarai/OmniHopper/1.20.2/dev/src/main/resources/cicada/omnihopper/conversations.json")
-						.or(JsonSource.fromResource("cicada/omnihopper/conversations.json")),
-				LOGGER::info
-		);
-	}
+    @Override
+    public void registerConversations(ConversationManager conversationManager) {
+        conversationManager.registerSource(
+                JsonSource.fromUrl("https://raw.githubusercontent.com/enjarai/OmniHopper/1.20.2/dev/src/main/resources/cicada/omnihopper/conversations.json")
+                        .or(JsonSource.fromResource("cicada/omnihopper/conversations.json")),
+                LOGGER::info
+        );
+    }
 }

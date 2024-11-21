@@ -25,7 +25,6 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
@@ -34,6 +33,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
+import net.minecraft.world.block.WireOrientation;
 import nl.enjarai.omnihopper.OmniHopper;
 import nl.enjarai.omnihopper.blocks.entity.hopper.HopperBlockEntity;
 import nl.enjarai.omnihopper.blocks.entity.hopper.behaviour.ItemHopperBehaviour;
@@ -48,10 +48,10 @@ import java.util.Set;
 public abstract class HopperBlock extends BlockWithEntity implements DatagenBlock, TextureMapProvider, HasTooltip {
     public static final BooleanProperty ENABLED;
     public static final VoxelShape[] SUCKY_AREA;
-    private static final VoxelShape MIDDLE_SHAPE;
-    private static final VoxelShape POINTY_SHAPE;
     protected static final VoxelShape[][] SHAPES;
     protected static final VoxelShape[][] SHAPES_RAYCAST;
+    private static final VoxelShape MIDDLE_SHAPE;
+    private static final VoxelShape POINTY_SHAPE;
 
     static {
         ENABLED = Properties.ENABLED;
@@ -128,7 +128,9 @@ public abstract class HopperBlock extends BlockWithEntity implements DatagenBloc
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         BlockState state = super.getPlacementState(ctx);
-        return state == null ? null : state.with(ENABLED, true);
+        return state == null
+               ? null
+               : state.with(ENABLED, true);
     }
 
     @Override
@@ -152,11 +154,13 @@ public abstract class HopperBlock extends BlockWithEntity implements DatagenBloc
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return world.isClient ? null : (world1, pos, state1, blockEntity) -> {
-            if (blockEntity instanceof HopperBlockEntity<?> hopperBlockEntity) {
-                hopperBlockEntity.tick(world, pos, state);
-            }
-        };
+        return world.isClient
+               ? null
+               : (world1, pos, state1, blockEntity) -> {
+                   if (blockEntity instanceof HopperBlockEntity<?> hopperBlockEntity) {
+                       hopperBlockEntity.tick(world, pos, state);
+                   }
+               };
     }
 
     @Override
@@ -165,11 +169,11 @@ public abstract class HopperBlock extends BlockWithEntity implements DatagenBloc
     }
 
     @Override
-    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient && world.getBlockEntity(pos) instanceof HopperBlockEntity<?> hopperBlockEntity) {
             return hopperBlockEntity.onUseWithItem(player, hand, hit);
         }
-        return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
     }
 
     @Override
@@ -182,7 +186,7 @@ public abstract class HopperBlock extends BlockWithEntity implements DatagenBloc
             }
 
         }
-        return ActionResult.success(world.isClient);
+        return ActionResult.SUCCESS_SERVER;
     }
 
     @Override
@@ -196,9 +200,9 @@ public abstract class HopperBlock extends BlockWithEntity implements DatagenBloc
     }
 
     @Override
-    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+    protected void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, @Nullable WireOrientation wireOrientation, boolean notify) {
         this.updateEnabled(world, pos, state);
-        super.neighborUpdate(state, world, pos, block, fromPos, notify);
+        super.neighborUpdate(state, world, pos, sourceBlock, wireOrientation, notify);
     }
 
     protected void updateEnabled(World world, BlockPos pos, BlockState state) {

@@ -63,7 +63,9 @@ public abstract class FurnaceFuelBucketStorage extends SnapshotParticipant<ItemS
 
     @Override
     public long getAmount() {
-        return isResourceBlank() ? 0 : FluidConstants.BUCKET;
+        return isResourceBlank()
+               ? 0
+               : FluidConstants.BUCKET;
     }
 
     @Override

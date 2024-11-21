@@ -18,17 +18,13 @@
   "block.omnihopper.waxed_oxidized_fluid_hopper": "Funil de cobre oxidado encerado",
   "block.omnihopper.wooden_omnihopper": "Funil de madeira multidirecional",
   "block.omnihopper.wooden_hopper": "Funil de madeira",
-
   "block.omnihopper.open_box": "Baú sem tampa",
-
   "item.omnihopper.omnihopper.tooltip": "Pode ser colocado em qualquer orientação",
   "item.omnihopper.fluid_omnihopper.tooltip": "Transfere fluidos em vez de itens, pode ser colocado em qualquer orientação",
   "item.omnihopper.fluid_hopper.tooltip": "Transfere fluidos em vez de itens",
   "item.omnihopper.wooden_omnihopper.tooltip": "Uma variante de funil mais barata e mais lenta, pode ser colocado em qualquer orientação",
   "item.omnihopper.wooden_hopper.tooltip": "Uma variante de funil mais barata e mais lenta",
-
   "item.omnihopper.open_box.tooltip": "Qualquer item adicionado é imediatamente largado no chão",
-
   "container.omnihopper": "Funil de ferro multidirecional",
   "container.fluid_omnihopper": "Funil de cobre multidirecional",
   "container.fluid_hopper": "Funil de cobre",

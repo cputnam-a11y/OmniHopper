@@ -59,15 +59,15 @@ public record HopperRotation(Direction modelDirection, VariantSettings.Rotation 
             )
     );
 
-    public static HopperRotation getFor(Direction suckyDirection, Direction pointyDirection) {
-        return ALL.get(suckyDirection).get(pointyDirection);
-    }
-
     public HopperRotation(Direction modelDirection) {
         this(modelDirection, R0, R0);
     }
 
     public HopperRotation(Direction modelDirection, VariantSettings.Rotation rotX) {
         this(modelDirection, rotX, R0);
+    }
+
+    public static HopperRotation getFor(Direction suckyDirection, Direction pointyDirection) {
+        return ALL.get(suckyDirection).get(pointyDirection);
     }
 }

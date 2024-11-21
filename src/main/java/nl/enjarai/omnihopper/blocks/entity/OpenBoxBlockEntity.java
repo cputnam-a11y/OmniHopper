@@ -54,7 +54,9 @@ public class OpenBoxBlockEntity extends BlockEntity {
             var pos = getPlacePos();
             //noinspection DataFlowIssue
             var blockState = getWorld().getBlockState(pos);
-            return maxAmount >= FluidConstants.BLOCK && blockState.canBucketPlace(resource.getFluid()) ? 1000 : 0;
+            return maxAmount >= FluidConstants.BLOCK && blockState.canBucketPlace(resource.getFluid())
+                   ? 1000
+                   : 0;
         }
 
         @Override

@@ -11,19 +11,19 @@ import nl.enjarai.omnihopper.util.DatagenBlock;
 import java.util.concurrent.CompletableFuture;
 
 public class ModTags extends FabricTagProvider<Block> {
-	public ModTags(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-		super(output, Registries.BLOCK.getKey(), registriesFuture);
-	}
+    public ModTags(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        super(output, Registries.BLOCK.getKey(), registriesFuture);
+    }
 
-	@Override
-	protected void configure(RegistryWrapper.WrapperLookup arg) {
-		for (var block : ModBlocks.ALL) {
-			if (block instanceof DatagenBlock datagen) {
-				for (var tagKey : datagen.getConfiguredTags()) {
-					var tag = getOrCreateTagBuilder(tagKey);
-					tag.add(block);
-				}
-			}
-		}
-	}
+    @Override
+    protected void configure(RegistryWrapper.WrapperLookup arg) {
+        for (var block : ModBlocks.ALL) {
+            if (block instanceof DatagenBlock datagen) {
+                for (var tagKey : datagen.getConfiguredTags()) {
+                    var tag = getOrCreateTagBuilder(tagKey);
+                    tag.add(block);
+                }
+            }
+        }
+    }
 }

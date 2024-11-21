@@ -6,8 +6,6 @@ import net.minecraft.data.client.TextureMap;
 import net.minecraft.util.Identifier;
 
 public interface TextureMapProvider {
-    TextureMap getTextureMap();
-
     static TextureMap forHopperType(Identifier id) {
         return new TextureMap()
                 .put(TextureKey.PARTICLE, getSubId(id, "_side"))
@@ -29,14 +27,16 @@ public interface TextureMapProvider {
 
     static TextureMap forVanillaHopper() {
         return new TextureMap()
-                .put(TextureKey.PARTICLE, new Identifier("block/hopper_outside"))
-                .put(TextureKey.SIDE, new Identifier("block/hopper_outside"))
-                .put(TextureKey.TOP, new Identifier("block/hopper_top"))
-                .put(TextureKey.BOTTOM, new Identifier("block/hopper_outside"))
-                .put(TextureKey.INSIDE, new Identifier("block/hopper_inside"));
+                .put(TextureKey.PARTICLE, Identifier.of("block/hopper_outside"))
+                .put(TextureKey.SIDE, Identifier.of("block/hopper_outside"))
+                .put(TextureKey.TOP, Identifier.of("block/hopper_top"))
+                .put(TextureKey.BOTTOM, Identifier.of("block/hopper_outside"))
+                .put(TextureKey.INSIDE, Identifier.of("block/hopper_inside"));
     }
 
     static Identifier getSubId(Identifier id, String suffix) {
         return id.withPath(path -> "block/" + path + suffix);
     }
+
+    TextureMap getTextureMap();
 }

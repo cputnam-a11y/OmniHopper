@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.6-SNAPSHOT'
+	id 'fabric-loom' version '1.8-SNAPSHOT'
 	id 'maven-publish'
 	id "me.modmuss50.mod-publish-plugin" version "0.4.4"
 }
@@ -24,6 +24,9 @@ repositories {
 	}
 	maven {
 		url "https://maven.enjarai.dev/mirrors"
+	}
+	maven {
+		url "https://maven.gnomecraft.net/releases"
 	}
 	mavenLocal()
 }

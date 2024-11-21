@@ -18,22 +18,17 @@
   "block.omnihopper.waxed_oxidized_fluid_hopper": "Waxed Oxidized Flopper",
   "block.omnihopper.wooden_omnihopper": "Omni-Whopper",
   "block.omnihopper.wooden_hopper": "Whopper",
-
   "block.omnihopper.open_box": "Lidless Chest",
-
   "item.omnihopper.omnihopper.tooltip": "Can be placed in any orientation",
   "item.omnihopper.fluid_omnihopper.tooltip": "Transfers fluids instead of items, omnidirectional",
   "item.omnihopper.fluid_hopper.tooltip": "Transfers fluids instead of items",
   "item.omnihopper.wooden_omnihopper.tooltip": "A cheaper and slower hopper variant, omnidirectional",
   "item.omnihopper.wooden_hopper.tooltip": "A cheaper and slower hopper variant",
-
   "item.omnihopper.open_box.tooltip": "Drops any inserted items on the ground",
-
   "container.omnihopper": "Omni-Hopper",
   "container.fluid_omnihopper": "Omni-Flopper",
   "container.fluid_hopper": "Flopper",
   "container.wooden_omnihopper": "Omni-Whopper",
   "container.wooden_hopper": "Whopper",
-
   "gamerule.omnihopper:removeFurnaceExtractionExceptions": "[OmniHopper] Remove Furnace fuel slot extraction exceptions"
 }

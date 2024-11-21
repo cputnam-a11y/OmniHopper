@@ -7,7 +7,7 @@ import nl.enjarai.omnihopper.screen.ModScreenHandlers;
 
 @Environment(EnvType.CLIENT)
 public class ModHandledScreens {
-	public static void register() {
-		HandledScreens.register(ModScreenHandlers.ONE_SLOT_HOPPER, OneSlotHopperScreen::new);
-	}
+    public static void register() {
+        HandledScreens.register(ModScreenHandlers.ONE_SLOT_HOPPER, OneSlotHopperScreen::new);
+    }
 }

@@ -1,6 +1,5 @@
 {
   "mod_id": "omnihopper",
-
   "conversations": {
     "cicada:greetings": {
       "lines": [
@@ -34,7 +33,6 @@
         }
       ]
     },
-
     "cicada:christmas": {
       "lines": [
         {
