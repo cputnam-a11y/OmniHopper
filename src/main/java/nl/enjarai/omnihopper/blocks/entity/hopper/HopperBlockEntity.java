@@ -15,8 +15,8 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.Nameable;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -185,7 +185,7 @@ public abstract class HopperBlockEntity<T> extends BlockEntity implements Coordi
         return behaviour.createMenu(syncId, playerInventory, player);
     }
 
-    public ItemActionResult onUseWithItem(PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUseWithItem(PlayerEntity player, Hand hand, BlockHitResult hit) {
         return behaviour.onUseWithItem(player, hand, hit);
     }
 }

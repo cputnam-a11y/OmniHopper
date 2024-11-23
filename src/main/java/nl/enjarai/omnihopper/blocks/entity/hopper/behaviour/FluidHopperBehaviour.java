@@ -18,9 +18,9 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -104,7 +104,7 @@ public class FluidHopperBehaviour extends HopperBehaviour<FluidVariant> {
 	}
 
 	@Override
-	public ItemActionResult onUseWithItem(PlayerEntity player, Hand hand, BlockHitResult hit) {
+	public ActionResult onUseWithItem(PlayerEntity player, Hand hand, BlockHitResult hit) {
 		var stack = player.getStackInHand(hand);
 
 		// If the player is holding a bucket, we can try to insert or extract fluid
@@ -138,7 +138,7 @@ public class FluidHopperBehaviour extends HopperBehaviour<FluidVariant> {
 								SoundCategory.BLOCKS, 1.0f, 1.0f
 						);
 						player.getWorld().emitGameEvent(null, GameEvent.FLUID_PICKUP, player.getPos());
-						return ItemActionResult.SUCCESS;
+						return ActionResult.SUCCESS;
 					}
 				}
 			// If the bucket is not empty and the storage has room for one bucket of this fluid, we can try to insert
@@ -167,7 +167,7 @@ public class FluidHopperBehaviour extends HopperBehaviour<FluidVariant> {
 								SoundCategory.BLOCKS, 1.0f, 1.0f
 						);
 						player.getWorld().emitGameEvent(null, GameEvent.FLUID_PLACE, player.getPos());
-						return ItemActionResult.SUCCESS;
+						return ActionResult.SUCCESS;
 					}
 				}
 			}

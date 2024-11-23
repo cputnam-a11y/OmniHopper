@@ -6,7 +6,6 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.data.client.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
@@ -21,8 +20,8 @@ public abstract class OmniHopperBlock extends HopperBlock {
     public static final EnumProperty<Direction> SUCKY_BIT;
 
     static {
-        POINTY_BIT = DirectionProperty.of("pointy_bit", Direction.values());
-        SUCKY_BIT = DirectionProperty.of("sucky_bit", Direction.values());
+        POINTY_BIT = EnumProperty.of("pointy_bit", Direction.class, Direction.values());
+        SUCKY_BIT = EnumProperty.of("sucky_bit", Direction.class, Direction.values());
     }
 
     public OmniHopperBlock(Settings settings) {

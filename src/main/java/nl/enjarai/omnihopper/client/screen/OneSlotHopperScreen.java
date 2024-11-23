@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -31,6 +32,6 @@ public class OneSlotHopperScreen extends HandledScreen<OneSlotHopperScreenHandle
 	protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
 		int i = (width - backgroundWidth) / 2;
 		int j = (height - backgroundHeight) / 2;
-		context.drawTexture(TEXTURE, i, j, 0, 0, backgroundWidth, backgroundHeight);
+		context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, i, j, 0, 0, backgroundWidth, backgroundHeight, 256, 256);
 	}
 }
