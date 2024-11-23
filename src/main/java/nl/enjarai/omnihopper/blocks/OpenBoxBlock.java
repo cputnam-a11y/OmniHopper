@@ -3,7 +3,6 @@ package nl.enjarai.omnihopper.blocks;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.render.model.json.SimpleMultipartModelSelector;
 import net.minecraft.data.client.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
@@ -16,7 +15,6 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -140,6 +138,6 @@ public class OpenBoxBlock extends BlockWithEntity implements DatagenBlock, HasTo
 
     @Override
     protected MapCodec<? extends BlockWithEntity> getCodec() {
-        return null;
+        return createCodec(OpenBoxBlock::new);
     }
 }
