@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "minecraft:copper_ingot",
+    "omnihopper:fluid_hopper"
+  ],
+  "result": {
+    "count": 1,
+    "id": "omnihopper:fluid_omnihopper"
+  }
+}

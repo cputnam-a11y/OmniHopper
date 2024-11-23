@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "B": "minecraft:bucket",
+    "c": "minecraft:copper_ingot"
+  },
+  "pattern": [
+    "c c",
+    "cBc",
+    " c "
+  ],
+  "result": {
+    "count": 1,
+    "id": "omnihopper:fluid_hopper"
+  },
+  "show_notification": false
+}

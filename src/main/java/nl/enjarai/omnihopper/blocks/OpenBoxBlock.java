@@ -3,6 +3,8 @@ package nl.enjarai.omnihopper.blocks;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.render.model.json.SimpleMultipartModelSelector;
+import net.minecraft.data.client.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
@@ -14,6 +16,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -22,6 +25,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
+import nl.enjarai.omnihopper.OmniHopper;
 import nl.enjarai.omnihopper.blocks.entity.OpenBoxBlockEntity;
 import nl.enjarai.omnihopper.util.DatagenBlock;
 import nl.enjarai.omnihopper.util.HasTooltip;
@@ -84,6 +88,23 @@ public class OpenBoxBlock extends BlockWithEntity implements DatagenBlock, HasTo
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new OpenBoxBlockEntity(pos, state);
+    }
+
+    @Override
+    public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+        final var model = OmniHopper.id("block/open_box");
+       blockStateModelGenerator.blockStateCollector.accept(
+               VariantsBlockStateSupplier.create(ModBlocks.OPEN_BOX_BLOCK)
+                       .coordinate(
+                               BlockStateVariantMap.create(FACING)
+                                       .register(Direction.UP, BlockStateVariant.create().put(VariantSettings.MODEL, model))
+                                        .register(Direction.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, model).put(VariantSettings.X, VariantSettings.Rotation.R90))
+                                        .register(Direction.DOWN, BlockStateVariant.create().put(VariantSettings.MODEL, model).put(VariantSettings.X, VariantSettings.Rotation.R180))
+                                        .register(Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, model).put(VariantSettings.X, VariantSettings.Rotation.R270))
+                                        .register(Direction.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, model).put(VariantSettings.Y, VariantSettings.Rotation.R90).put(VariantSettings.X, VariantSettings.Rotation.R270))
+                                        .register(Direction.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, model).put(VariantSettings.Y, VariantSettings.Rotation.R90).put(VariantSettings.X, VariantSettings.Rotation.R90))
+                       )
+       );
     }
 
     @Override
