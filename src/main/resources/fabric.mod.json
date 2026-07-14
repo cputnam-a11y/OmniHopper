@@ -37,10 +37,10 @@
   "accessWidener" : "omnihopper.accesswidener",
   "depends": {
     "cooldown-coordinator": ">=0.10.0-",
-    "cicada": ">=0.15.1 <1.0.0",
+    "cicada": ">=0.15.2 <1.0.0",
     "fabric-api": "*",
     "fabricloader": ">=0.19.2",
-    "minecraft": "26.1.x",
+    "minecraft": "26.2.x",
     "java": ">=25"
   },
   "custom": {

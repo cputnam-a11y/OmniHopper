@@ -18,8 +18,8 @@ public class ModTags extends FabricTagsProvider.BlockTagsProvider {
 		for (var block : ModBlocks.ALL) {
 			if (block instanceof DatagenBlock datagen) {
 				for (var tagKey : datagen.getConfiguredTags()) {
-					var tag = valueLookupBuilder(tagKey);
-					tag.add(block);
+					var tag = builder(tagKey);
+					tag.add(block.builtInRegistryHolder().key());
 				}
 			}
 		}

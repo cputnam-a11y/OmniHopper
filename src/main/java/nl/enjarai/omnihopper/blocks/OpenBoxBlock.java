@@ -1,5 +1,6 @@
 package nl.enjarai.omnihopper.blocks;
 
+import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Quadrant;
 import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
@@ -14,7 +15,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -143,8 +143,8 @@ public class OpenBoxBlock extends BaseEntityBlock implements DatagenBlock, HasTo
                             new Variant(
                                     ModelLocationUtils.getModelLocation(this),
                                     new Variant.SimpleModelState(
-                                            rotations.getA(),
-                                            rotations.getB(),
+                                            rotations.getFirst(),
+                                            rotations.getSecond(),
                                             Quadrant.R0,
                                             false
                                     )
@@ -159,14 +159,14 @@ public class OpenBoxBlock extends BaseEntityBlock implements DatagenBlock, HasTo
         );
     }
 
-    private static Tuple<Quadrant, Quadrant> rotationFromDirection(Direction dir) {
+    private static Pair<Quadrant, Quadrant> rotationFromDirection(Direction dir) {
         return switch (dir) {
-            case DOWN -> new Tuple<>(Quadrant.R180, Quadrant.R0);
-            case UP -> new Tuple<>(Quadrant.R0, Quadrant.R0);
-            case NORTH -> new Tuple<>(Quadrant.R90, Quadrant.R0);
-            case SOUTH -> new Tuple<>(Quadrant.R270, Quadrant.R0);
-            case WEST -> new Tuple<>(Quadrant.R270, Quadrant.R90);
-            case EAST -> new Tuple<>(Quadrant.R90, Quadrant.R90);
+            case DOWN -> new Pair<>(Quadrant.R180, Quadrant.R0);
+            case UP -> new Pair<>(Quadrant.R0, Quadrant.R0);
+            case NORTH -> new Pair<>(Quadrant.R90, Quadrant.R0);
+            case SOUTH -> new Pair<>(Quadrant.R270, Quadrant.R0);
+            case WEST -> new Pair<>(Quadrant.R270, Quadrant.R90);
+            case EAST -> new Pair<>(Quadrant.R90, Quadrant.R90);
         };
     }
 
